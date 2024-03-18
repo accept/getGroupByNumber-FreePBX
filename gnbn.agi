@@ -30,7 +30,6 @@
 	$sql .= "LEFT OUTER JOIN contactmanager_entry_numbers ON contactmanager_group_entries.id = contactmanager_entry_numbers.entryid ";
 	$sql .= "WHERE number LIKE '%$number%'";
 
-
 	//SQLを実行
 	$res = $db->prepare($sql);
 	$res->execute();
