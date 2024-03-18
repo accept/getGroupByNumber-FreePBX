@@ -17,7 +17,7 @@
 	if(isset($argv[1])){
 		$number = $argv[1];
 	}else{
-		agi_verbose("No arguements provided, exiting.");
+		$AGI->verbose("No number provided, exiting.");;
 		$AGI->set_variable($result, 'error');	
 		exit;
 	}
