@@ -1,0 +1,67 @@
+#!/usr/bin/php -q
+<?php
+	// Load FreePBX bootstrap environment
+	require_once('/etc/freepbx.conf');
+
+	// set up AGI env
+	include("phpagi.php");
+	$AGI = new AGI();
+
+	// log something in /var/log/asterisk/full
+	$AGI->verbose("gnbn.agi starting up");
+
+	//CID取得 - 指定がない場合は処理終了
+	if(isset($argv[1])){
+		$number = $argv[1];
+	}else{
+		agi_verbose("No arguements provided, exiting.");
+		$AGI->set_variable($result, 'error');	
+		exit;
+	}
+
+
+	//データベース接続を初期化
+	global $db;
+
+	$sql = "SELECT * FROM contactmanager_groups ";
+	$sql .= "LEFT OUTER JOIN contactmanager_group_entries ON contactmanager_groups.id = contactmanager_group_entries.groupid ";
+	$sql .= "LEFT OUTER JOIN contactmanager_entry_numbers ON contactmanager_group_entries.id = contactmanager_entry_numbers.entryid ";
+	$sql .= "WHERE number LIKE '%$number%'";
+
+
+	// Execute the SQL statement
+	$res = $db->prepare($sql);
+	$res->execute();
+
+	// Check that something is returned
+	if (DB::IsError($res)) {
+		// Potentially clean this up so that it outputs pretty if not valid								
+		error_log( "Error attemptig to get the list of ring groups<br>($sql)<br>\n" . $res->getMessage() . "\n<br>\n");
+	}else{
+		$row = $res->fetchAll(PDO::FETCH_ASSOC);
+		if(count($row) > 0){
+			//echo "<pre>Found ".count($row)." rows:\n";
+			//echo var_dump($row);
+			//echo "\n</pre>\n";
+			//echo $row[0]['name'];
+			$my_ringgroups = "";
+			foreach($row as $line){
+				$my_ringgroups = $line['name'];
+			}
+			$found = true;
+		}else{
+			$my_ringgroups = "No ring groups found\n";
+		}
+	}
+
+	// Output
+	$result = $my_ringgroups;
+
+	// log the random number result
+	$AGI->verbose("Group : ".$result);
+
+	// set an asterisk channel variable with the result
+	$AGI->set_variable("cmgn", $result);
+
+exit;
+?>
