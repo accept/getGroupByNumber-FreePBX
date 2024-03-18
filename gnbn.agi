@@ -1,13 +1,13 @@
 #!/usr/bin/php -q
 <?php
-	// Load FreePBX bootstrap environment
+	//FreePBXブートストラップ
 	require_once('/etc/freepbx.conf');
 
-	// set up AGI env
+	//AGI環境をセットアップ
 	include("phpagi.php");
 	$AGI = new AGI();
 
-	// log something in /var/log/asterisk/full
+	//ログを/var/log/asterisk/fullに記録
 	$AGI->verbose("gnbn.agi starting up");
 
 	//CID取得 - 指定がない場合は処理終了
@@ -18,7 +18,6 @@
 		$AGI->set_variable($result, 'error');	
 		exit;
 	}
-
 
 	//データベース接続を初期化
 	global $db;
