@@ -28,11 +28,11 @@
 	$sql .= "WHERE number LIKE '%$number%'";
 
 
-	// Execute the SQL statement
+	//SQLを実行
 	$res = $db->prepare($sql);
 	$res->execute();
 
-	// Check that something is returned
+	//戻り値をチェック
 	if (DB::IsError($res)) {
 		// Potentially clean this up so that it outputs pretty if not valid								
 		error_log( "Error attemptig to get the list of ring groups<br>($sql)<br>\n" . $res->getMessage() . "\n<br>\n");
