@@ -7,6 +7,9 @@
 	include("phpagi.php");
 	$AGI = new AGI();
 
+	//結果保存用変数初期化
+	$result = "";
+
 	//ログを/var/log/asterisk/fullに記録
 	$AGI->verbose("gnbn.agi starting up");
 
@@ -34,32 +37,23 @@
 
 	//戻り値をチェック
 	if (DB::IsError($res)) {
-		// Potentially clean this up so that it outputs pretty if not valid								
-		error_log( "Error attemptig to get the list of ring groups<br>($sql)<br>\n" . $res->getMessage() . "\n<br>\n");
+		//エラー処理							
+		error_log( "SQL Error<br>($sql)<br>\n" . $res->getMessage() . "\n<br>\n");
 	}else{
 		$row = $res->fetchAll(PDO::FETCH_ASSOC);
 		if(count($row) > 0){
-			//echo "<pre>Found ".count($row)." rows:\n";
-			//echo var_dump($row);
-			//echo "\n</pre>\n";
-			//echo $row[0]['name'];
-			$my_ringgroups = "";
-			foreach($row as $line){
-				$my_ringgroups = $line['name'];
+			foreach($row as $group){
+				$result = $group['name'];
 			}
-			$found = true;
 		}else{
-			$my_ringgroups = "No ring groups found\n";
+			$result = "No group found";
 		}
 	}
 
-	// Output
-	$result = $my_ringgroups;
-
-	// log the random number result
+	//ログに結果を出力
 	$AGI->verbose("Group : ".$result);
 
-	// set an asterisk channel variable with the result
+	//asteriskチャネル変数に結果を出力
 	$AGI->set_variable("cmgn", $result);
 
 exit;
