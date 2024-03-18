@@ -10,7 +10,7 @@
 	//結果保存用変数初期化
 	$result = "";
 
-	//ログを/var/log/asterisk/fullに記録
+	//ログを出力
 	$AGI->verbose("gnbn.agi starting up");
 
 	//CID取得 - 指定がない場合は処理終了
