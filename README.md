@@ -16,7 +16,7 @@ ContactManagerのAPIを使用したかったのですが、GroupNameを取得す
 
 次に、Dynamic Routesを下記画像のように構成します。<br/>
 AGI Lookupはggbn.agiまでのパスと引数です。<br/>
-番号からグループ名を取得するため[NUMBER]となっています。<br/>
+引数は番号からグループ名を取得するため[NUMBER]となっています。<br/>
 AGI Result Variableはggbn.agiに記述されている結果を格納する変数名です。<br/>
 スクリプトをそのまま使用する場合はgnとなります。
 
