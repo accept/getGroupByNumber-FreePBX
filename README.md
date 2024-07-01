@@ -14,7 +14,11 @@ ContactManagerのAPIを使用したかったのですが、GroupNameを取得す
 <br/>
 <br/>
 
-次に、Dynamic Routesを下記画像のように構成します。
+次に、Dynamic Routesを下記画像のように構成します。<br/>
+AGI Lookupはggbn.agiまでのパスと引数です。<br/>
+番号からグループ名を取得するため[NUMBER]となっています。<br/>
+AGI Result Variableはggbn.agiに記述されている結果を格納する変数名です。<br/>
+スクリプトをそのまま使用する場合はgnとなります。
 
 ![後内](https://github.com/accept/getGroupByNumber-FreePBX/assets/421679/9329fc1b-ae88-44f9-8257-aa7ba6102549)
 
