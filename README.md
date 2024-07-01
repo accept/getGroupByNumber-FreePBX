@@ -4,7 +4,7 @@ Dynamic Routesと組み合わせることで、特定グループの着信を自
 相手が分かっている着信を最初から特定部署のキューに回したりといった使い方が出来ます。<br/>
 <br/>
 直接SQLを実行しているため、ContactManagerのDB構造が変わった場合は使えないと思います。<br/>
-ContactManagerのAPIを使用したかったのですが、GroupeNameを取得する方法が見つかりませんでした。<br/>
+ContactManagerのAPIを使用したかったのですが、GroupNameを取得する方法が見つかりませんでした。<br/>
 インストールはagi-binディレクトリにコピーし、パーミッションを設定するだけです。<br/>
 /var/lib/asterisk/agi-binなどですが、各環境に合わせて配置してください。<br/>
 
