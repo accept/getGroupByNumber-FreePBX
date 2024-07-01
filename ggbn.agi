@@ -53,7 +53,7 @@
 	$AGI->verbose("Group : ".$result);
 
 	//asteriskチャネル変数に結果を出力
-	$AGI->set_variable("cmgn", $result);
+	$AGI->set_variable("gn", $result);
 
 exit;
 ?>
